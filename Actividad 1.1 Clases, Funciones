@@ -1,0 +1,63 @@
+void main() {
+  final personaUno = Persona('Alejandro', 'Yepes Geney', 20, 'Cartagena');
+
+  final Map<String, dynamic> datosJson = {
+    'nombre': 'Miguel',
+    'apellido': 'Caro Orozco',
+    'edad': 19,
+    'ciudad': 'Cali',
+  };
+  final personaDos = Persona.fromJson(datosJson);
+
+  print(mensajeInicio());
+
+  print(
+    'Persona 1: ${personaUno.nombre} ${personaUno.apellido}, ${personaUno.edad} años, vive en ${personaUno.ciudad}',
+  );
+  print(
+    'Persona 2: ${personaDos.nombre} ${personaDos.apellido}, ${personaDos.edad} años, vive en ${personaDos.ciudad}',
+  );
+
+  print(presentacion(personaDos.nombre, personaDos.apellido));
+  print(saludo(personaUno.nombre, personaUno.edad));
+
+  print(mensajeFinal());
+}
+
+class Persona {
+  String nombre = '';
+  String apellido = '';
+  int edad = 0;
+  String ciudad = '';
+
+  Persona(String nombre, String apellido, int edad, String ciudad) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.edad = edad;
+    this.ciudad = ciudad;
+  }
+
+  Persona.fromJson(Map<String, dynamic> json)
+    : nombre = json['nombre'] ?? 'No se encontró nombre',
+      apellido = json['apellido'] ?? 'No se encontró apellido',
+      edad = json['edad'] ?? 0,
+      ciudad = json['ciudad'] ?? 'No se encontró ciudad';
+
+  @override
+  toString() {
+    return '$nombre, $apellido, $edad, $ciudad';
+  }
+}
+
+String saludo(String nombre, int edad) =>
+    'Hola me llamo $nombre y tengo $edad años';
+
+String mensajeInicio() {
+  return 'Actividad hecha';
+}
+
+String presentacion(String nombre, String apellido) {
+  return 'Te presento a $nombre $apellido.';
+}
+
+String mensajeFinal() => 'Gracias, att:aleyepes';
